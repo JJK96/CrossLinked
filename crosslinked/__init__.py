@@ -88,22 +88,20 @@ def nformatter(nformat, name):
     # Get position of name values in text
     tmp = nformat.split('}')
     f_position = int(re.search(r'(-?\d+)', tmp[0]).group(0)) if ':' in tmp[0] else 0
-    l_position = int(re.search(r'(-?\d+)', tmp[1]).group(0)) if ':' in tmp[1] else -1
 
     # Extract names from raw text
     tmp = name.split(' ')
     try:
         f_name = tmp[f_position] if len(tmp) > 2 else tmp[0]
-        l_name = tmp[l_position] if len(tmp) > 2 else tmp[-1]
     except:
         f_name = tmp[0]
-        l_name = tmp[-1]
+    l_name = ''.join(tmp[1:])
 
     # Use replace function to create final output
     val = re.sub(r'-?\d+:', '', nformat)
-    val = val.replace('{f}', f_name[0])
+    #val = val.replace('{f}', f_name[0])
     val = val.replace('{first}', f_name)
-    val = val.replace('{l}', l_name[0])
+    #val = val.replace('{l}', l_name[0])
     val = val.replace('{last}', l_name)
     return val
 
